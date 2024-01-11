@@ -58,6 +58,20 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="update">
+            <property name="text">
+             <string>update</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showInfo">
+            <property name="text">
+             <string>showInfo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="upload">
             <property name="text">
              <string>upload</string>
@@ -78,7 +92,7 @@
      <x>0</x>
      <y>0</y>
      <width>563</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

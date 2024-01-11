@@ -7,6 +7,8 @@ cell::cell(QWidget *parent)
 	connect(ui.deleteTask, SIGNAL(clicked()), this, SLOT(onDeleteClick()));
 	connect(ui.displayImage, SIGNAL(clicked()), this, SLOT(onDisplayClick()));
 	connect(ui.upload, SIGNAL(clicked()), this, SLOT(onUploadClick()));
+    connect(ui.update, SIGNAL(clicked()), this, SLOT(sendUpdate()));
+    connect(ui.showInfo, SIGNAL(clicked()), this, SLOT(onShowInfoClick()));
 }
 
 cell::~cell()
@@ -27,8 +29,20 @@ void cell::onDeleteClick() {
 	}
 }
 
+void cell::sendUpdate(){
+    emit sendUpdateClick(unique);
+    this->close();
+
+}
+
+void cell::onShowInfoClick(){
+    QMessageBox::information(this, "success", "info show");
+    emit sendInfoClick(cellNum);
+}
+
 void cell::onUploadClick() {
-	emit sendUploadClick(cellNum);
+    emit sendUploadClick(cellNum);
+
 }
 
 void cell::onDisplayClick() {

@@ -19,10 +19,14 @@ public:
 public slots:
 	void onDeleteClick();
 	void onDisplayClick();
+    void sendUpdate();
+    void onShowInfoClick();
 
 signals:
 	void sendDeleteCellSignal(int cellNum);
 	void sendDisplayImage(int);
+    void sendUpdateClick(int);
+    void sendInfoClick(int);
 
 private:
 	Ui::wsCellClass ui;

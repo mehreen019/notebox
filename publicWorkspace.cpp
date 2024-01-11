@@ -30,7 +30,7 @@ void publicWorkspace::handleClose() {
 
 void publicWorkspace::addCells(string t, int r, int pNum) {
 	QMessageBox::information(this, "success", "reached to upload");
-	wsCell* newCell = new wsCell(this);
+    pwsCell* newCell = new pwsCell(this);
     //ui.gridLayout_2->addWidget(newCell, pNum +1 , 0);
     ui.scrollArea->setWidgetResizable(true);
 
@@ -42,10 +42,26 @@ void publicWorkspace::addCells(string t, int r, int pNum) {
 	newCell->setTitle(t);
 	allCells.push_back(newCell);
 
-	connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
-	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
+    //connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
+    connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
+    connect(newCell, SIGNAL(sendInfoClick(int)), this, SLOT(receiveInfo(int)));
 
     //pubNoteNum++;
+}
+
+void publicWorkspace::receiveInfo(int num){
+    //QMessageBox::information(this, "success", "info show");
+    Info = new info(this);
+    //Info->setModal(true);
+    Info->setTitle(pubNotes[num]->Gettitle());
+    Info->setDate(pubNotes[num]->Getdate());
+    Info->setCategory(pubNotes[num]->getCategory());
+    Info->setTopic(pubNotes[num]->getTopic());
+    Info->setSubject(pubNotes[num]->getSubject());
+    Info->show();
+
+    connect(Info, SIGNAL(sendToDash()), this, SLOT(backToDash()));
+
 }
 
 void publicWorkspace::receiveDelete(int num) {
@@ -112,7 +128,7 @@ void publicWorkspace::addOnLoad() {
 	QMessageBox::information(this, "success", q);
 
 
-    for (int i = 0; i < pubNoteNum; i++) {
+    for(int i = 0; i < pubNoteNum; i++) {
         string t = pubNotes[i]->Gettitle();
         int unique = pubNotes[i]->getUnique();
         addCells(t, unique,i);

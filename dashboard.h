@@ -12,6 +12,7 @@
 #include "remWindow.h"
 #include <cstring>
 #include "textviewwindow.h"
+#include "info.h"
 
 using namespace std;
 
@@ -67,6 +68,11 @@ public slots:
 	void toWS();
 	void backToDash();
 	void toRem();
+    void receiveUpdate(int);
+    void receiveSclUpdate(int);
+    void onUpdateSubmitClick();
+    void receiveInfo(int);
+    //void onSclUpdateSubmitClick();
 
 signals:
 	void crossClicked();
@@ -82,7 +88,8 @@ private:
 	publicWorkspace* pws;
 	remWindow* w;
     textViewWindow * textView;
-
+    updateButton* ub;
+    info* Info;
 	//vector<task> tasks;
 
 };

@@ -26,6 +26,9 @@ public:
     int getUnique() { return uid;  }
     void setUser(string t) { userName=t; }
     string getUser() { return userName; }
+    virtual string getCategory() { return "None"; }
+    virtual string getTopic() { return "None"; }
+    virtual string getSubject() { return "None"; }
     
 
     void displayinfo();
@@ -87,11 +90,11 @@ public:
     schoolNotes();
     schoolNotes(string Cat, string Topic, string sub, string title, string date, string t, int uid, string u);
  
-    string getCategory() { return category; }
+    string getCategory() override{ return category; }
     void setCategory(string cat) { category = cat; }
-    string getTopic() { return topicName; }
+    string getTopic() override{ return topicName; }
     void setTopic(string top) { topicName = top; }
-    string getSubject() { return subject; }
+    string getSubject() override{ return subject; }
     void setSubject(string sub) { subject = sub; }
 
     void serialize(ofstream& out) const override

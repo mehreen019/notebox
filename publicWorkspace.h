@@ -8,6 +8,8 @@
 #include <cstring>
 #include "textviewwindow.h"
 #include "sclButton.h"
+#include "pwsCell.h"
+#include "info.h"
 
 class publicWorkspace : public QMainWindow
 {
@@ -25,7 +27,7 @@ public:
 	static notes* pubNotes[];
 	static int pubNoteNum;
 
-	QVector<wsCell*> allCells;
+    QVector<pwsCell*> allCells;
 
 	void addOnLoad();
     static void readFromFile();
@@ -40,6 +42,7 @@ public slots:
 		event->ignore();
 	}
 	void handleClose();
+    void receiveInfo(int);
 
 signals:
 	void sendToDash();
@@ -49,4 +52,5 @@ private:
 	Ui::publicWorkspaceClass ui;
 	image* img;
     textViewWindow * textView;
+    info* Info;
 };

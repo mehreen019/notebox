@@ -16,15 +16,18 @@ SOURCES += \
     dashboard.cpp \
     form.cpp \
     image.cpp \
+    info.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     notes.cpp \
     publicWorkspace.cpp \
+    pwscell.cpp \
     remEdit.cpp \
     remWindow.cpp \
     sclButton.cpp \
     textviewwindow.cpp \
+    updatebutton.cpp \
     user.cpp \
     wsCell.cpp
 
@@ -37,14 +40,17 @@ HEADERS += \
     dashboard.h \
     form.h \
     image.h \
+    info.h \
     loginwindow.h \
     mainwindow.h \
     notes.h \
     publicWorkspace.h \
+    pwscell.h \
     remEdit.h \
     remWindow.h \
     sclButton.h \
     textviewwindow.h \
+    updatebutton.h \
     user.h \
     wsCell.h
 
@@ -55,13 +61,16 @@ FORMS += \
     dashboard.ui \
     form.ui \
     image.ui \
+    info.ui \
     loginwindow.ui \
     mainwindow.ui \
     publicWorkspace.ui \
+    pwscell.ui \
     remEdit.ui \
     remWindow.ui \
     sclButton.ui \
     textviewwindow.ui \
+    updatebutton.ui \
     wsCell.ui
 
 # Default rules for deployment.

@@ -1,5 +1,7 @@
 ﻿#include "dashboard.h"
 #define filepath "E:/coding/projects/hopefullyfinalnotebox/userInfo.txt"
+int cellToUpdate;
+
 
 dashboard::dashboard(QWidget *parent)
 	: QMainWindow(parent), rownumber(0), feduprow(0), b(NULL), img(NULL), pws(NULL)
@@ -40,7 +42,7 @@ void dashboard::addPersonalNote(string title, string date)
 
     int r = rand();
     allNotes[rownumber] = new personalNotes(title, date, tf, r, user);
-	const char* char_p = date.c_str();
+    //const char* char_p = date.c_str();
     //QMessageBox::information(this, "success", neww);
 	//qDebug() << rownumber;
     addPersCells(allNotes[rownumber]->Gettitle(), r, rownumber);
@@ -107,9 +109,26 @@ void dashboard::addCells(string t, int r, int num)
 	connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
 	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
 	connect(newCell, SIGNAL(sendUploadClick(int)), this, SLOT(uploadFile(int)));
+    connect(newCell, SIGNAL(sendUpdateClick(int)), this, SLOT(receiveUpdate(int)));
+    connect(newCell, SIGNAL(sendInfoClick(int)), this, SLOT(receiveInfo(int)));
 
-    //rownumber++;
+    //rownumber++; sendUpdateClick(cellNum) sendInfoClick(cellNum)
 	//feduprow++;
+}
+
+void dashboard::receiveUpdate(int num){
+    cout<<"reached to update"<<endl;
+    //ub = new updateButton(this);
+    //ub->show();
+    //cellToUpdate=num;
+    receiveDelete(num);
+    sb = new sclButton(this);
+    sb->show();
+    QMessageBox::information(this, "success", "update reached");
+}
+
+void dashboard::onUpdateSubmitClick(){
+
 }
 
 void dashboard::addPersCells(string t, int r, int num)
@@ -129,9 +148,22 @@ void dashboard::addPersCells(string t, int r, int num)
 
 	connect(newCell, SIGNAL(sendDeleteCellSignal(int)), this, SLOT(receiveDelete(int)));
 	connect(newCell, SIGNAL(sendDisplayImage(int)), this, SLOT(receiveDisplayImage(int)));
+    connect(newCell, SIGNAL(sendUpdateClick(int)), this, SLOT(receiveSclUpdate(int)));
+    connect(newCell, SIGNAL(sendInfoClick(int)), this, SLOT(receiveInfo(int)));
 
     //rownumber++;
 	//feduprow++;
+}
+
+void dashboard::receiveSclUpdate(int num){
+    cout<<"reached to update"<<endl;
+    //ub = new updateButton(this);
+    //ub->show();
+    //cellToUpdate=num;
+    receiveDelete(num);
+    b = new button(this);
+    b->show();
+    QMessageBox::information(this, "success", "update reached");
 }
 
 void dashboard::uploadFile(int num) {
@@ -156,6 +188,21 @@ void dashboard::toWS() {
 
 void dashboard::backToDash() {
 	this->show();
+}
+
+void dashboard::receiveInfo(int num){
+    //QMessageBox::information(this, "success", "info show");
+    Info = new info(this);
+    //Info->setModal(true);
+    Info->setTitle(allNotes[num]->Gettitle());
+    Info->setDate(allNotes[num]->Getdate());
+    Info->setCategory(allNotes[num]->getCategory());
+    Info->setTopic(allNotes[num]->getTopic());
+    Info->setSubject(allNotes[num]->getSubject());
+    Info->show();
+
+    connect(Info, SIGNAL(sendToDash()), this, SLOT(backToDash()));
+
 }
 
 void dashboard::receiveDelete(int num) {
@@ -244,6 +291,8 @@ void dashboard::sclNoteAddClick() {
 	sb = new sclButton(this);
 	sb->show();
 }
+
+
 
 void dashboard::submitFile() {
 	QString picpath = QFileDialog::getOpenFileName(

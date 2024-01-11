@@ -51,6 +51,20 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="update">
+            <property name="text">
+             <string>update</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showInfo">
+            <property name="text">
+             <string>show info</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="delete2">
             <property name="text">
              <string>delete</string>
