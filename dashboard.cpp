@@ -23,7 +23,8 @@ dashboard::~dashboard()
 }
 
 void dashboard::toRem() {
-	w = new remWindow(this);
+    QString userr = QString::fromStdString(user);
+    w = new remWindow(this, userr);
 	w->show();
 
 	connect(w, SIGNAL(toDash()), this, SLOT(backToDash()));

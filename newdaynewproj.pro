@@ -28,6 +28,7 @@ SOURCES += \
     sclButton.cpp \
     textviewwindow.cpp \
     updatebutton.cpp \
+    updatepasswordwindow.cpp \
     user.cpp \
     wsCell.cpp
 
@@ -51,6 +52,7 @@ HEADERS += \
     sclButton.h \
     textviewwindow.h \
     updatebutton.h \
+    updatepasswordwindow.h \
     user.h \
     wsCell.h
 
@@ -71,6 +73,7 @@ FORMS += \
     sclButton.ui \
     textviewwindow.ui \
     updatebutton.ui \
+    updatepasswordwindow.ui \
     wsCell.ui
 
 # Default rules for deployment.

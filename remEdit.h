@@ -9,9 +9,9 @@ class remEdit : public QDialog
 	Q_OBJECT
 
 public:
-	remEdit(QWidget *parent = nullptr);
+    remEdit(QWidget *parent = nullptr, const QString& username=" ");
 	~remEdit();
-
+    QString user;
 	QListWidget* getListWidget() const;
 
 private slots:

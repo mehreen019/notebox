@@ -1,13 +1,13 @@
 #include "remEdit.h"
 
-remEdit::remEdit(QWidget *parent)
-	: QDialog(parent)
+remEdit::remEdit(QWidget *parent, const QString& username)
+    : QDialog(parent), user(username)
 {
 	ui.setupUi(this);
 
     connect(ui.goBack, SIGNAL(clicked()), this, SLOT(on_back_clicked()));
-
-    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\reminder.txt");
+    QString filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + user + "/reminder.txt";
+    QFile file(filePath);
     if (!file.open(QIODevice::ReadWrite))
     {
         QMessageBox::information(0, "error", file.errorString());
@@ -62,10 +62,12 @@ QListWidget* remEdit::getListWidget() const
 void remEdit::on_save_clicked()
 {
     // Update the file after removing the reminder
-    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\reminder.txt");
-    if (!file.open(QIODevice::ReadWrite))
+    QString filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + user + "/reminder.txt";
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
-        QMessageBox::information(0, "error", file.errorString());
+        QMessageBox::information(0, "Error", "Unable to open file for writing: " + file.errorString());
+        //QMessageBox::information(0, "error", file.errorString());
         return;
     }
 
@@ -77,6 +79,8 @@ void remEdit::on_save_clicked()
     {
         out << ui.listWidget->item(i)->text() << "\n";
     }
+
+    file.close();
 }
 
 

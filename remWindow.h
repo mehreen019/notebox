@@ -10,8 +10,9 @@ class remWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	remWindow(QWidget *parent = nullptr);
+    remWindow(QWidget *parent = nullptr, QString user="");
 	~remWindow();
+    QString user;
 
 private slots:
 	void on_reminder_add_clicked();

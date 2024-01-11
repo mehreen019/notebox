@@ -1,10 +1,14 @@
 #include "remWindow.h"
 
-remWindow::remWindow(QWidget *parent)
-	: QMainWindow(parent)
+remWindow::remWindow(QWidget *parent,  QString username)
+    : QMainWindow(parent), user(username)
 {
 	ui.setupUi(this);
     connect(ui.toDash, SIGNAL(clicked()), this, SLOT(toDash()));
+    QDir userDir(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + user);
+    if (!userDir.exists()) {
+        userDir.mkpath(".");
+    }
 }
 
 remWindow::~remWindow()
@@ -33,7 +37,8 @@ void remWindow::on_reminder_add_clicked()
     timers.append(timer);
 
     QString text = ui.Reminders->text() + "- (" + reminderDateTime.toString("yyyy-MM-dd hh:mm:ss") + ")";
-    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\reminder.txt");
+    QString filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + user + "/reminder.txt";
+    QFile file(filePath);
     if (!file.open(QIODevice::Append))
     {
         QMessageBox::information(0, "error", file.errorString());
@@ -47,6 +52,10 @@ void remWindow::on_reminder_add_clicked()
 
 void remWindow::show_message()
 {
+    QTimer *senderTimer = qobject_cast<QTimer*>(sender());
+    if (senderTimer) {
+        senderTimer->stop();
+    }
     QMessageBox::information(this, "Reminder", "It's time!");
 }
 
@@ -57,7 +66,7 @@ void remWindow::on_Edit_button_clicked()
     di.setModal(true);
     di.exec();*/
 
-    re = new remEdit(this);
+    re = new remEdit(this, user);
     re->show();
     
     connect(re, SIGNAL(toRemWindow()), this, SLOT(on_back_button_clicked()));

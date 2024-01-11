@@ -31,7 +31,7 @@
       <x>120</x>
       <y>70</y>
       <width>177</width>
-      <height>61</height>
+      <height>69</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -72,10 +72,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>81</x>
-      <y>220</y>
-      <width>256</width>
-      <height>27</height>
+      <x>40</x>
+      <y>200</y>
+      <width>346</width>
+      <height>31</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -97,6 +97,13 @@
       <widget class="QPushButton" name="pushButton_delete">
        <property name="text">
         <string>Delete</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_updatePassword">
+       <property name="text">
+        <string>Update</string>
        </property>
       </widget>
      </item>

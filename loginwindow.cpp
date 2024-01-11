@@ -97,10 +97,45 @@ void LoginWindow::addUser(QString userName,QString userPassword, QString name, Q
         passwordManager[userName] = userPassword;
     }
 }
-void LoginWindow::updateUser()
+
+bool LoginWindow::updateUser(QString userName, QString userPassword)
 {
+    LoginWindow::readAll();
+
+    bool userFound = false;
+    userFound = LoginWindow::findUser(userName);
+
+    if(userFound)
+    {
+
+        for(int i = 0; i < n; i++)
+        {
+            const char* charArray = userList[i]->getUserName();
+            QString temp = QString::fromUtf8(charArray);
+
+            if(temp == userName)
+            {
+                userList[i]->setUserPassword(userPassword.toStdString().c_str());
+                LoginWindow::writeAll();
+                passwordManager[userName] = userPassword;
+
+                QMessageBox::information(this, "Update Password", "Password Updated");
+                return true;
+            }
+        }
+
+
+
+        return true;
+    }
+    else
+    {
+        QMessageBox::information(this, "Update Password", "No such user exist");
+        return false;
+    }
 
 }
+
 bool LoginWindow::findUser(QString userToFind)
 {
     for(int i = 0; i < n; i++)
@@ -264,3 +299,18 @@ void LoginWindow::on_pushButton_delete_clicked()
 
 }
 
+void LoginWindow::on_pushButton_updatePassword_clicked()
+{
+    LoginWindow::readAll();
+    for(int i = 0; i < n; i++)
+    {
+        QString userNameQString = QString::fromUtf8(userList[i]->getUserName());
+        QString userPasswordQString = QString::fromUtf8(userList[i]->getUserPassword());
+        passwordManager[userNameQString] = userPasswordQString;
+    }
+    QString userName = ui->lineEdit_userName->text();
+    QString userPassword = ui->lineEdit_userPassword->text();
+
+    updatePassword = new updatePasswordWindow(nullptr, userName.toStdString());
+    updatePassword->show();
+}

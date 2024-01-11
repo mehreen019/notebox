@@ -10,6 +10,7 @@
 #include <QByteArray>
 #include <fstream> //for file-stream functions
 #include <iostream>
+#include "updatepasswordwindow.h"
 
 namespace Ui {
 class LoginWindow;
@@ -25,7 +26,8 @@ public:
 
     static void addUser(QString userName,QString userPassword, QString name, QString id, QString email);
     bool login();
-    void updateUser();
+    //void updateUser();
+    bool updateUser(QString userName, QString userPassword);
     static bool findUser(QString userToFind);
     bool deleteUser();
     static User* userList[];
@@ -40,10 +42,13 @@ private slots:
 
     void on_pushButton_delete_clicked();
 
+    void on_pushButton_updatePassword_clicked();
+
 private:
     Ui::LoginWindow *ui;
    // Dashboard * userDashboard;
     dashboard * userDashboard;
+    updatePasswordWindow * updatePassword;
     static QMap <QString, QString> passwordManager;
 
     QString userName;
