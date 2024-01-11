@@ -296,9 +296,9 @@ void dashboard::sclNoteAddClick() {
 
 
 void dashboard::submitFile() {
-	QString picpath = QFileDialog::getOpenFileName(
+    QString pic = QFileDialog::getOpenFileName(
         this, "Open file", "C://", "Text files (*.txt);;Images (*.png *.xpm *.jpg)"	);
-
+    QString picpath = pic.replace(" ", "-");
 	string p = picpath.toLocal8Bit().constData();
 	tf = p;
 	//char* ff;
@@ -315,8 +315,12 @@ void dashboard::submitFile() {
 
 void dashboard::submitPersNoteInfo() {
 	//QMessageBox::information(this, "success", "info loaded");
-	QString title = b->ui.lineEdit_title->text();
-	QString date = b->ui.lineEdit_date->text();
+    QString t = b->ui.lineEdit_title->text();
+    if(t==""){QMessageBox::information(this, "WARNING", "no title given"); return; }
+    QString title = t.replace(" ", "-");
+    QString d = b->ui.lineEdit_date->text();
+    if(d==""){QMessageBox::information(this, "WARNING", "no date given"); return; }
+    QString date = d.replace(" ", "-");
 
 	std::string mt = title.toLocal8Bit().constData();
 	//note.Settitle(mt);
@@ -332,11 +336,25 @@ void dashboard::submitPersNoteInfo() {
 
 void dashboard::submitSclNoteInfo() {
 	//QMessageBox::information(this, "success", "info loaded");
-	QString title = sb->ui.title->text();
-	QString date = sb->ui.date->text();
-	QString category = sb->ui.category->text();
-	QString topic = sb->ui.topic->text();
-	QString subject = sb->ui.subject->text();
+    QString t = sb->ui.title->text();
+    if(t==""){QMessageBox::information(this, "WARNING", "no title given"); return; }
+    QString title = t.replace(" ", "-");
+
+    QString  d= sb->ui.date->text();
+    if(d==""){QMessageBox::information(this, "WARNING", "no date given"); return; }
+    QString date = d.replace(" ", "-");
+
+    QString  pi= sb->ui.category->text();
+    if(pi==""){QMessageBox::information(this, "WARNING", "no category given"); return; }
+    QString category = pi.replace(" ", "-");
+
+    QString  top= sb->ui.topic->text();
+    if(top==""){QMessageBox::information(this, "WARNING", "no topic given"); return; }
+    QString topic = top.replace(" ", "-");
+
+    QString sub = sb->ui.subject->text();
+    if(sub==""){QMessageBox::information(this, "WARNING", "no subject given"); return; }
+    QString subject = sub.replace(" ", "-");
 
 	std::string mt = title.toLocal8Bit().constData();
 	//note.Settitle(mt);
