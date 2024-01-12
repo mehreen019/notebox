@@ -4,7 +4,7 @@ int cellToUpdate;
 
 
 dashboard::dashboard(QWidget *parent)
-	: QMainWindow(parent), rownumber(0), feduprow(0), b(NULL), img(NULL), pws(NULL)
+    : QMainWindow(parent), rownumber(0), feduprow(0), tf(""), b(NULL), img(NULL), pws(NULL)
 {
 	ui.setupUi(this); 
 	connect(ui.noteAdd, SIGNAL(clicked()), this, SLOT(persNoteAddClick()));
@@ -12,6 +12,7 @@ dashboard::dashboard(QWidget *parent)
 	connect(this, SIGNAL(crossClicked()), this, SLOT(handleClose()));
 	connect(ui.ws_button, SIGNAL(clicked()), this, SLOT(toWS()));
 	connect(ui.reminderAdd, SIGNAL(clicked()), this, SLOT(toRem()));
+    //connect(ui.exitbtn, SIGNAL(clicked), this, SLOT(handleClose()));
 }
 
 dashboard::~dashboard()
@@ -179,7 +180,7 @@ void dashboard::uploadFile(int num) {
 
 void dashboard::toWS() {
 
-    if (pws == NULL) { pws = new publicWorkspace(this);  }
+    { pws = new publicWorkspace(this);  }
     pws->addOnLoad();
 	pws->show();
 	this->hide();
@@ -300,6 +301,7 @@ void dashboard::submitFile() {
         this, "Open file", "C://", "Text files (*.txt);;Images (*.png *.xpm *.jpg)"	);
     QString picpath = pic.replace(" ", "-");
 	string p = picpath.toLocal8Bit().constData();
+    if(p==""){QMessageBox::information(this, "WARNING", "no file uploaded"); return; }
 	tf = p;
 	//char* ff;
 	//strcpy(tf, p.c_str());
@@ -321,6 +323,8 @@ void dashboard::submitPersNoteInfo() {
     QString d = b->ui.lineEdit_date->text();
     if(d==""){QMessageBox::information(this, "WARNING", "no date given"); return; }
     QString date = d.replace(" ", "-");
+
+    if(tf==""){QMessageBox::information(this, "WARNING", "no file uploaded"); return; }
 
 	std::string mt = title.toLocal8Bit().constData();
 	//note.Settitle(mt);
@@ -355,6 +359,8 @@ void dashboard::submitSclNoteInfo() {
     QString sub = sb->ui.subject->text();
     if(sub==""){QMessageBox::information(this, "WARNING", "no subject given"); return; }
     QString subject = sub.replace(" ", "-");
+
+    if(tf==""){QMessageBox::information(this, "WARNING", "no file uploaded"); return; }
 
 	std::string mt = title.toLocal8Bit().constData();
 	//note.Settitle(mt);
@@ -555,5 +561,11 @@ void dashboard::writeToFile() {
 		}
 	}*/
 
+}
+
+
+void dashboard::on_exitbtn_clicked()
+{
+    handleClose();
 }
 

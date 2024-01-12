@@ -15,27 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="0">
-     <widget class="QPushButton" name="sclNoteAdd">
-      <property name="text">
-       <string>add school notes</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="ws_button">
-      <property name="text">
-       <string>view public workspace</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="reminderAdd">
-      <property name="text">
-       <string>add reminder</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="noteAdd">
       <property name="text">
@@ -54,7 +33,7 @@
          <x>0</x>
          <y>0</y>
          <width>599</width>
-         <height>319</height>
+         <height>283</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -63,6 +42,34 @@
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="sclNoteAdd">
+      <property name="text">
+       <string>add school notes</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="reminderAdd">
+      <property name="text">
+       <string>add reminder</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="ws_button">
+      <property name="text">
+       <string>view public workspace</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="exitbtn">
+      <property name="text">
+       <string>exit</string>
+      </property>
      </widget>
     </item>
    </layout>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>400</height>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -174,7 +174,7 @@
        <item>
         <widget class="QPushButton" name="imgUpload">
          <property name="text">
-          <string>upload image</string>
+          <string>upload</string>
          </property>
         </widget>
        </item>

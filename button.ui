@@ -30,7 +30,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>upload image</string>
+        <string>upload</string>
        </property>
        <property name="autoDefault">
         <bool>true</bool>
@@ -124,9 +124,7 @@
   <tabstop>lineEdit_date</tabstop>
   <tabstop>upload</tabstop>
  </tabstops>
- <resources>
-  <include location="button.qrc"/>
- </resources>
+ <resources/>
  <connections/>
  <slots>
   <signal>signal1()</signal>

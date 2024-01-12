@@ -28,6 +28,27 @@ void AddUserWindow::on_pushButton_AddUser_clicked()
     QString id = ui->lineEdit_id->text();
     QString email = ui->lineEdit_email->text();
 
+    if(userName.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "username cannot be empty"); return;
+    }
+    if(userPassword.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "password cannot be empty"); return;
+    }
+    if(name.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "name cannot be empty"); return;
+    }
+    if(id.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "id cannot be empty"); return;
+    }
+    if(email.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "email cannot be empty"); return;
+    }
+
     LoginWindow::readAll();
     bool userNameExists = LoginWindow::findUser(userName);
     if(userNameExists)

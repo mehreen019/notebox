@@ -153,6 +153,7 @@ bool LoginWindow::findUser(QString userToFind)
 bool LoginWindow::deleteUser()
 {
     QString userName = ui->lineEdit_userName->text();
+    string unn = userName.toStdString();
     QString userPassword = ui->lineEdit_userPassword->text();
 
     bool userFound = false;
@@ -181,6 +182,26 @@ bool LoginWindow::deleteUser()
              if(found)
                 QMessageBox::information(this, "Delete", "Your account has been removed");
              else QMessageBox::information(this, "Delete", "Error while removing acc");
+
+             dashboard* d = new dashboard();
+             d->readFromFile();
+             for (int i = 0; i < d->rownumber; i++) {
+                 if (d->allNotes[i]->getUser() == unn) {
+                     //allCells[i]->close();
+                     cout<<d->allNotes[i]->Gettitle()<<endl;
+                     for (int j = i; j < d->rownumber; j++) {
+                         if (j + 1 == d->rownumber) break;
+
+                         d->allNotes[j] = d->allNotes[j + 1];
+                         //allCells[j] = allCells[j + 1];
+                     }
+                     d->rownumber--;
+                 }
+             }
+             d->writeToFile();
+
+
+
              std::cout << "after deelete n = "<< n << std::endl;
              LoginWindow::writeAll();
              return true;
@@ -203,8 +224,18 @@ bool LoginWindow::login()
     QString userName = ui->lineEdit_userName->text();
     QString userPassword = ui->lineEdit_userPassword->text();
 
+    if(userName.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "Fields cannot be empty"); return false;
+    }
+    else if(userPassword.isEmpty())
+    {
+        QMessageBox::information(this, "Warning", "password cannot be empty"); return false;
+    }
+    else{
     bool userFound = false;
     userFound = LoginWindow::findUser(userName);
+
     if(userFound)
     {
         QString foundPassword = passwordManager[userName];
@@ -236,6 +267,7 @@ bool LoginWindow::login()
     {
         QMessageBox::information(this, "Login", "No such user exist");
         return false;
+    }
     }
 }
 void LoginWindow::readAll()
@@ -311,6 +343,15 @@ void LoginWindow::on_pushButton_updatePassword_clicked()
     QString userName = ui->lineEdit_userName->text();
     QString userPassword = ui->lineEdit_userPassword->text();
 
-    updatePassword = new updatePasswordWindow(nullptr, userName.toStdString());
-    updatePassword->show();
+    // updatePassword = new updatePasswordWindow(nullptr, userName.toStdString());
+    // updatePassword->show();
+    if(userPassword == passwordManager[userName])
+    {
+        updatePassword = new updatePasswordWindow(nullptr, userName.toStdString());
+        updatePassword->show();
+    }
+    else
+    {
+        QMessageBox::information(this, "Login", "Wrong Password");
+    }
 }

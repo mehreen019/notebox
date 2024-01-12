@@ -53,7 +53,7 @@
           <item>
            <widget class="QPushButton" name="displayImage">
             <property name="text">
-             <string>display image</string>
+             <string>display </string>
             </property>
            </widget>
           </item>

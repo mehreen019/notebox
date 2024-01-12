@@ -77,6 +77,9 @@ public slots:
 signals:
 	void crossClicked();
 
+private slots:
+    void on_exitbtn_clicked();
+
 private:
     Ui::dashboard ui;
 	//vector<notes*> sclNotes;
